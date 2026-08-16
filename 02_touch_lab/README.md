@@ -9,28 +9,30 @@
 
 ### 1. 빈 파일 생성
 
-#### 단일 빈 파일 생성 (0바이트)
+#### 1-1. 단일 빈 파일 생성 (0바이트)
 - touch touch_file_single.txt
 
-#### 다중 파일 생성
+#### 1-2. 다중 파일 생성
 - touch touch_file_a.txt touch_file_b.txt touch_file_c.txt
 
-#### 중괄호 확장(Brace Expansion)을 이용한 연속 파일 생성
+#### 1-3. 중괄호 확장(Brace Expansion)을 이용한 연속 파일 생성
 - touch touch_file_log_{1..5}.txt
 
-### 2. 타임스탬프 상세 조회 (atime, mtime, ctime etc)
+### 2. 타임스탬프 상세 조회 
+#### 2-1. atime, mtime, ctime etc 
 - stat touch_file_single.txt
 
 ### 3. 시간 갱신 옵션
 
-#### 수정 시간(mtime)만 현재 시각으로 갱신
+#### 3-1. 수정 시간(mtime)만 현재 시각으로 갱신
 - touch -m touch_file_single.txt
 
-#### 접근 시간(atime)만 현재 시각으로 갱신
+#### 3-2. 접근 시간(atime)만 현재 시각으로 갱신
 - touch -a touch_file_single.txt
 
-#### 특정 날짜/시간으로 강제 지정 (형식: YYYYMMDDhhmm.ss)
+#### 3-3. 특정 날짜/시간으로 강제 지정 (형식: YYYYMMDDhhmm.ss)
 - touch -t 202608151200.00 touch_file_single.txt
 
-#### 파일이 없을 경우 새로 생성 방지
+### 4. 파일이 없을 경우 
+#### 4-1. 새로 생성 방지
 touch -c nonexist_file.txt
