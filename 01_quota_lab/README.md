@@ -1,6 +1,6 @@
 # 01. Linux Disk Quota Practice
 
-## 📌 실습 개요
+## 실습 개요
 가상 디스크 이미지를 생성하여 루프백 디바이스로 마운트하고, 사용자별 디스크 용량 제한(Block Quota) 및 파일 개수 제한(Inode Quota)을 설정하여 초과 차단 동작을 검증합니다.
 
 ---
@@ -41,7 +41,7 @@
 
 ---
 
-## 핵심 요약
+## 요약
 - **Block Quota vs Inode Quota:** 디스크 저장 용량(KB) 제한 vs 파일/디렉터리 개수 제한
 - **Soft Limit:** 경고 한도. 초과 시 유예 기간(Grace Period) 내에 정리 필요
 - **Hard Limit:** 절대 한도. 초과 시 즉시 파일 생성/쓰기 차단
