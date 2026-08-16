@@ -15,7 +15,7 @@
 #### 다중 파일 생성
 - touch touch_file_a.txt touch_file_b.txt touch_file_c.txt
 
-# 중괄호 확장(Brace Expansion)을 이용한 연속 파일 생성
+#### 중괄호 확장(Brace Expansion)을 이용한 연속 파일 생성
 - touch touch_file_log_{1..5}.txt
 
 ### 2. 타임스탬프 상세 조회 (atime, mtime, ctime etc)
