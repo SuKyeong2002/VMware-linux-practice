@@ -33,6 +33,29 @@
 #### 3-3. 특정 날짜/시간으로 강제 지정 (형식: YYYYMMDDhhmm.ss)
 - touch -t 202608151200.00 touch_file_single.txt
 
-### 4. 파일이 없을 경우 
-#### 4-1. 새로 생성 방지
+#### 3-4. 자연어 문자열로 시간 지정 (-d)
+- touch -d "2 days ago" touch_file_single.txt
+
+#### 3-5. 다른 파일의 타임스탬프 복사 (-r)
+- touch -r touch_file_single.txt touch_file_a.txt
+
+#### 3-6. 파일이 없을 경우 새로 생성 방지 (-c)
 touch -c nonexist_file.txt
+
+### 4. 배치/백업 자동화에서의 동시성 제어(Lock 파일 패턴)
+[스크립트 시작]
+    │
+       ▼
+[락 파일 존재 여부 확인] ──(존재함)──▶ "이미 작업 중입니다" 출력 후 [즉시 종료]
+    │ (없음)
+       ▼
+[touch /tmp/backup.lock 생성] (잠금)
+    │
+       ▼
+[실제 백업 및 압축 로직 수행]
+       │
+       ▼
+[rm -f /tmp/backup.lock 삭제] (잠금 해제)
+    │
+       ▼
+[스크립트 정상 종료]
