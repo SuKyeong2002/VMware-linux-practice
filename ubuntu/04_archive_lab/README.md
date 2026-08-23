@@ -1,7 +1,7 @@
-# 04. Linux Archive & Compression Practice
+# 04. Linux Archive, Compression & Incremental Backup Practice
 
 ## 실습 개요
-리눅스의 표준 단일 압축 도구(`gzip`, `bzip2`, `xz`)와 아카이브 도구인 `tar`, Windows 호환 포맷(`zip`)을 활용하여 파일 묶기, 압축, 해제, 수정 및 압축 파일 실시간 조회 명령어(`zcat` 등)를 검증합니다.
+리눅스의 표준 단일 압축 도구(`gzip`, `bzip2`, `xz`)와 아카이브 도구인 `tar`, Windows 호환 포맷(`zip`)을 활용하여 파일 묶기, 압축, 해제, 수정, 스냅샷 기반의 증분 백업(`-g`) 및 압축 파일 실시간 조회 명령어(`zcat` 등)를 검증합니다.
 
 ---
 
@@ -23,12 +23,17 @@
 - `tar -tvf backup.tar.gz` (압축 해제 없이 내부 파일 목록 확인)
 - `tar -xzvf backup.tar.gz -C ./target_folder` (-C 옵션으로 특정 디렉터리에 해제)
 
-### 3. `tar` 고급 관리 실습
+### 3. `tar` 스냅샷 기반 증분 백업 실습 (`-g` / `--listed-incremental`)
+- `tar -g backup.snar -czvf full_backup.tar.gz ./data_src` (1차 전체 백업 수행 및 스냅샷 메타데이터 장부 생성)
+- `tar -g backup.snar -czvf incr_backup.tar.gz ./data_src` (2차 증분 백업: 스냅샷과 비교하여 변경/추가된 파일만 골라 백업)
+- `tar -g /dev/null -xzvf full_backup.tar.gz` (증분 백업 아카이브 복원)
+
+### 4. `tar` 고급 관리 실습
 - `tar -czvf backup.tar.gz --exclude='exclude_folder' .` (특정 폴더 제외 후 압축)
 - `tar -rvf backup.tar new_file.txt` (기존 .tar 아카이브에 새 파일 추가)
 - `tar -uvf backup.tar new_file.txt` (기존 .tar 내 수정된 최신 파일만 갱신/추가)
 
-### 4. 압축 파일 내용 실시간 조회 및 검색 (압축 해제 불필요)
+### 5. 압축 파일 내용 실시간 조회 및 검색 (압축 해제 불필요)
 - `zcat test.log.gz` / `zgrep "pattern" test.log.gz` (gzip 텍스트 조회/검색)
 - `bzcat bz_test.log.bz2` / `bzgrep "pattern" bz_test.log.bz2` (bzip2 텍스트 조회/검색)
 - `xzcat xz_test.log.xz` / `xzgrep "pattern" xz_test.log.xz` (xz 텍스트 조회/검색)
@@ -47,3 +52,6 @@
 
 #### 4. `tar -cvfz backup.tar.gz [대상]` 명령어로 정상 압축할 수 있다. (x)
 - `-f` 옵션 바로 뒤에는 반드시 생성할 파일명이 와야 하므로 `-f`는 옵션 문자열의 맨 마지막에 위치해야 합니다 (`-czvf`).
+
+#### 5. `tar -N` 옵션은 스냅샷 메타데이터 파일을 기반으로 증분 백업을 수행하는 옵션이다. (x)
+- 스냅샷 장부 파일을 생성/참조하여 변경된 파일만 백업하는 증분 백업 옵션은 **`-g` (`--listed-incremental`)**입니다. (`-N`은 특정 기준 날짜 이후 파일만 선택하는 옵션)
