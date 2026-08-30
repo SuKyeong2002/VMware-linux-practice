@@ -5,9 +5,6 @@
 ---
 
 ## 1. 실습 환경 개요
-
-* **실습 일시:** 2026-08-30 ~ 2026-08-31
-* **실습 환경:** Ubuntu 24.04 LTS (VMware)
 * **핵심 패키지:**
   * **MTA (Mail Transfer Agent):** Postfix (`Local only` 모드)
   * **MUA (Mail User Agent):** GNU Mailutils (`mail`)
@@ -16,7 +13,6 @@
 ---
 
 ## 2. 실습 명령어 모음
-
 ### 2-1. 메일 패키지 설치 및 환경 설정
 #### 2-1-1. 패키지 업데이트 및 메일 서버/도구 설치
 - sudo apt update
